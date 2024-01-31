@@ -92,33 +92,29 @@ def input_fields():
     #
 
 def process_documents():
-    st.write(st.session_state)  # Debugging line
+    if not st.session_state.source_docs:
+        st.warning("Please upload the documents.")
+        return
 
-    if not st.session_state.openai_api_key or not st.session_state.pinecone_api_key or not st.session_state.pinecone_env or not st.session_state.pinecone_index or not st.session_state.source_docs:
-        st.warning(f"Please upload the documents and provide the missing fields.")
-    else:
-        try:
-            for source_doc in st.session_state.source_docs:
-                # Create a unique file name for the temporary file
-                temp_file_path = TMP_DIR / f"{uuid.uuid4()}.pdf"
+    try:
+        for source_doc in st.session_state.source_docs:
+            # Generate a unique file path
+            temp_file_path = TMP_DIR / f"{uuid.uuid4()}.pdf"
 
-                # Write the uploaded file's content to the temporary file
-                with open(temp_file_path, "wb") as f:
-                    f.write(source_doc.getbuffer())
+            # Write the content to the file
+            with open(temp_file_path, "wb") as f:
+                f.write(source_doc.getbuffer())
 
-                # Load, process, and clean up as before
-                documents = load_documents()
-                for _file in TMP_DIR.iterdir():
-                    temp_file = TMP_DIR.joinpath(_file)
-                    temp_file.unlink()
+            # Load, process, and clean up as before
+            # Ensure that these functions use 'temp_file_path' correctly
 
-                texts = split_documents(documents)
-                if not st.session_state.pinecone_db:
-                    st.session_state.retriever = embeddings_on_local_vectordb(texts)
-                else:
-                    st.session_state.retriever = embeddings_on_pinecone(texts)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
+        # If using local vectordb
+        if not st.session_state.pinecone_db:
+            st.session_state.retriever = embeddings_on_local_vectordb(texts)
+        else:
+            st.session_state.retriever = embeddings_on_pinecone(texts)
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
 
 def boot():
     #
