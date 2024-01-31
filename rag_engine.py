@@ -20,6 +20,11 @@ import streamlit as st
 st.set_page_config(page_title="RAG")
 st.title("Retrieval Augmented Generation Engine")
 
+import sys
+
+st.write("Python executable:", sys.executable)
+
+
 TMP_DIR = Path('Temp_Files')  # This will create Temp_Files in the current directory of the app
 
 TMP_DIR.mkdir(parents=True, exist_ok=True)
