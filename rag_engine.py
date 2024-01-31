@@ -19,9 +19,6 @@ import streamlit as st
 # Update the TMP_DIR path
 TMP_DIR = Path('/Users/ben/Documents/rag_streamlit_demo/Temp_Files')
 
-# Create the directory if it doesn't exist
-TMP_DIR.mkdir(parents=True, exist_ok=True)
-
 #TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
 
