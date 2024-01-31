@@ -105,6 +105,7 @@ def process_documents():
         return
 
     try:
+        texts = [] # Initialize an empty list to hold all texts from all documents
         for source_doc in st.session_state.source_docs:
             # Generate a unique file path
             temp_file_path = TMP_DIR / f"{uuid.uuid4()}.pdf"
