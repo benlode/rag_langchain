@@ -19,6 +19,14 @@ import streamlit as st
 
 # Update the TMP_DIR path
 TMP_DIR = Path('/Users/ben/Documents/rag_streamlit_demo/Temp_Files')
+test_file_path = TMP_DIR / "test_file.pdf"
+
+# Try creating a simple test file
+with open(test_file_path, "wb") as f:
+    f.write(b"Test content")
+
+st.write("Test file created successfully at:", test_file_path)
+
 
 #TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
