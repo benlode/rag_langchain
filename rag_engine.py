@@ -17,6 +17,9 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
+st.set_page_config(page_title="RAG")
+st.title("Retrieval Augmented Generation Engine")
+
 TMP_DIR = Path('Temp_Files')  # This will create Temp_Files in the current directory of the app
 
 TMP_DIR.mkdir(parents=True, exist_ok=True)
@@ -28,13 +31,8 @@ with open(test_file_path, "wb") as f:
 
 st.write("Test file created successfully at:", test_file_path)
 
-
-
 #TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
-
-st.set_page_config(page_title="RAG")
-st.title("Retrieval Augmented Generation Engine")
 
 
 def load_documents():
