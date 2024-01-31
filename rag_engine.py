@@ -16,13 +16,7 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
-TMP_DIR = '/ben/Documents/Evolutio/Temp_Files'
-
-# Create the directory if it doesn't exist
-if not os.path.exists(TMP_DIR):
-    os.makedirs(TMP_DIR)
-
-#TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
+TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
 
 st.set_page_config(page_title="RAG")
