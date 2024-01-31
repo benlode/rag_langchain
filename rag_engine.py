@@ -22,12 +22,6 @@ LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vecto
 st.set_page_config(page_title="RAG")
 st.title("Retrieval Augmented Generation Engine")
 
-if 'retriever' not in st.session_state:
-    st.error("Retriever is not initialized.")
-    # Initialize your retriever here or provide a way to do so
-else:
-    response = query_llm(st.session_state.retriever, query)
-
 
 def load_documents():
     loader = DirectoryLoader(TMP_DIR.as_posix(), glob='**/*.pdf')
@@ -135,9 +129,12 @@ def boot():
         st.chat_message('ai').write(message[1])    
     #
     if query := st.chat_input():
-        st.chat_message("human").write(query)
-        response = query_llm(st.session_state.retriever, query)
-        st.chat_message("ai").write(response)
+        if 'retriever' not in st.session_state:
+            st.error("Retriever is not initialized. Please submit documents first.")
+        else:
+            st.chat_message("human").write(query)
+            response = query_llm(st.session_state.retriever, query)
+            st.chat_message("ai").write(response)
 
 if __name__ == '__main__':
     #
