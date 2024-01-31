@@ -17,20 +17,17 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
-# Set up the temporary directory path
-TMP_DIR = Path('/Users/ben/Documents/rag_streamlit_demo/Temp_Files')
+TMP_DIR = Path('Temp_Files')  # This will create Temp_Files in the current directory of the app
 
-# Create the directory if it doesn't exist
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-# Define a test file path
 test_file_path = TMP_DIR / "test_file.pdf"
 
-# Try creating a simple test file
 with open(test_file_path, "wb") as f:
     f.write(b"Test content")
 
 st.write("Test file created successfully at:", test_file_path)
+
 
 
 #TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
