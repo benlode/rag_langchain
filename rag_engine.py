@@ -1,5 +1,6 @@
 import os, tempfile
 import pinecone
+import uuid
 
 from pathlib import Path
 from langchain.chains import RetrievalQA, ConversationalRetrievalChain
@@ -90,27 +91,28 @@ def input_fields():
     st.session_state.source_docs = st.file_uploader(label="Upload Documents", type="pdf", accept_multiple_files=True)
     #
 
-
 def process_documents():
-    st.write(st.session_state)  # Add this line for debugging
-    
+    st.write(st.session_state)  # Debugging line
+
     if not st.session_state.openai_api_key or not st.session_state.pinecone_api_key or not st.session_state.pinecone_env or not st.session_state.pinecone_index or not st.session_state.source_docs:
         st.warning(f"Please upload the documents and provide the missing fields.")
     else:
         try:
             for source_doc in st.session_state.source_docs:
-                #
-                with tempfile.NamedTemporaryFile(delete=False, dir=TMP_DIR.as_posix(), suffix='.pdf') as tmp_file:
-                    tmp_file.write(source_doc.read())
-                #
+                # Create a unique file name for the temporary file
+                temp_file_path = TMP_DIR / f"{uuid.uuid4()}.pdf"
+
+                # Write the uploaded file's content to the temporary file
+                with open(temp_file_path, "wb") as f:
+                    f.write(source_doc.getbuffer())
+
+                # Load, process, and clean up as before
                 documents = load_documents()
-                #
                 for _file in TMP_DIR.iterdir():
                     temp_file = TMP_DIR.joinpath(_file)
                     temp_file.unlink()
-                #
+
                 texts = split_documents(documents)
-                #
                 if not st.session_state.pinecone_db:
                     st.session_state.retriever = embeddings_on_local_vectordb(texts)
                 else:
