@@ -90,6 +90,8 @@ def input_fields():
 
 
 def process_documents():
+    st.write(st.session_state)  # Add this line for debugging
+    
     if not st.session_state.openai_api_key or not st.session_state.pinecone_api_key or not st.session_state.pinecone_env or not st.session_state.pinecone_index or not st.session_state.source_docs:
         st.warning(f"Please upload the documents and provide the missing fields.")
     else:
