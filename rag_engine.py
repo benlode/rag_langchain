@@ -1,7 +1,7 @@
 import os, tempfile
 import pinecone
-from pathlib import Path
 
+from pathlib import Path
 from langchain.chains import RetrievalQA, ConversationalRetrievalChain
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -16,7 +16,12 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
+# Update the TMP_DIR path
 TMP_DIR = Path('/Users/ben/Documents/rag_streamlit_demo/Temp_Files')
+
+# Create the directory if it doesn't exist
+TMP_DIR.mkdir(parents=True, exist_ok=True)
+
 #TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
 
