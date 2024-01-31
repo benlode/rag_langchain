@@ -16,7 +16,7 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
-TMP_DIR = '/Ben/Documents/Evolutio/Temp_Files'
+TMP_DIR = '/ben/Documents/Evolutio/Temp_Files'
 
 # Create the directory if it doesn't exist
 if not os.path.exists(TMP_DIR):
