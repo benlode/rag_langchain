@@ -16,7 +16,8 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 import streamlit as st
 
-TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
+TMP_DIR = Path('/Users/ben/Documents/rag_streamlit_demo/Temp_Files')
+#TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 LOCAL_VECTOR_STORE_DIR = Path(__file__).resolve().parent.joinpath('data', 'vector_store')
 
 st.set_page_config(page_title="RAG")
