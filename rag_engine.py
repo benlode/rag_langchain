@@ -4,8 +4,8 @@ import uuid
 
 from pathlib import Path
 from langchain.chains import RetrievalQA, ConversationalRetrievalChain
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain import OpenAI
 from langchain.llms.openai import OpenAIChat
 from langchain.document_loaders import DirectoryLoader
