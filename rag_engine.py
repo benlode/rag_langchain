@@ -46,7 +46,7 @@ def split_documents(documents):
     return texts
 
 def embeddings_on_local_vectordb(texts):
-    vectordb = Chroma.from_documents(texts, embedding=OpenAIEmbeddings(),
+    vectordb = Chroma.from_documents(texts, embedding=OpenAIEmbeddings(openai_api_key=st.session_state.openai_api_key),
                                      persist_directory=LOCAL_VECTOR_STORE_DIR.as_posix())
     vectordb.persist()
     retriever = vectordb.as_retriever(search_kwargs={'k': 7})
